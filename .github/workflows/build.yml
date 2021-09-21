@@ -34,20 +34,28 @@ jobs:
         path: tests
   
   coverage:
-    needs: [ test ]
-    name: coverage
+
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x, 13.x, 14.x, 15.x]
+
     steps:
-    - uses: actions/checkout@master
-    - uses: actions/setup-node@master
+    - name: Checkout repository
+      uses: actions/checkout@v2
       with:
-        node-version: '14'
-    - run: npm install -g yarn
-    - run: yarn install
-    - run: yarn build
-    - uses: paambaati/codeclimate-action@v2.2.4
-      env:
-        CC_TEST_REPORTER_ID: 945dfb58a832d233a3caeb84e3e6d3be212e8c7abcb48117fce63b9adcb43647
+        fetch-depth: 2
+
+    - name: Set up Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
       with:
-        coverageCommand: yarn coverage
+        node-version: ${{ matrix.node-version }}
+      run: npm install -g yarn
+
+    - name: Install dependencies
+      run: yarn install
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v1
   
