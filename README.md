@@ -1,5 +1,7 @@
 # Getting Started with Create React App
 
+[![codecov](https://codecov.io/gh/nibble0101/learn-test-coverage/branch/master/graph/badge.svg?token=H5LANOBRH6)](https://codecov.io/gh/nibble0101/learn-test-coverage)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

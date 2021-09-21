@@ -34,12 +34,12 @@ jobs:
         path: tests
   
   coverage:
-
+    needs: test
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [12.x, 13.x, 14.x, 15.x]
+        node-version: [14.x]
 
     steps:
     - name: Checkout repository
@@ -59,4 +59,5 @@ jobs:
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1
-  
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
